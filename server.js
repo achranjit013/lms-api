@@ -4,6 +4,10 @@ import express from "express";
 const app = express();
 const PORT = process.env.PORT || 8000;
 
+// db connection
+import { connectDB } from "./src/config/dbConfig.js";
+connectDB();
+
 // middlewares
 import cors from "cors";
 import morgan from "morgan";
@@ -11,6 +15,10 @@ import morgan from "morgan";
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
+
+// api endpoints
+import userRouter from "./src/routers/userRouter.js";
+app.use("/api/v1/users", userRouter);
 
 app.get("/", (req, res) => {
   res.json({
@@ -21,7 +29,7 @@ app.get("/", (req, res) => {
 
 app.use("*", (req, res, next) => {
   const error = {
-    message: "page not found",
+    message: "404 page not found",
     errorCode: 404,
   };
   next(error);
@@ -29,7 +37,6 @@ app.use("*", (req, res, next) => {
 
 // error handler
 app.use((error, req, res, next) => {
-  console.log(error);
   const errorCode = error.errorCode || 500;
 
   res.status(errorCode).json({
