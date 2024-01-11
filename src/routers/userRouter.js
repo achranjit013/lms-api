@@ -5,8 +5,10 @@ import { createUser } from "../models/user/UserModel.js";
 
 const router = express.Router();
 
+// create new admin
 router.post("/admin", newUserValidation, async (req, res, next) => {
   try {
+    // encrpt password before storing to db
     req.body.password = hashPassword(req.body.password);
     req.body.role = "admin";
 
