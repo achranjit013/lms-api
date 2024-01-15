@@ -11,3 +11,18 @@ Content-Type: application/json
   "email":"r@r.com",
   "password":"1"
 }
+
+###login user
+POST {{rootAPI}}/login
+Content-Type: application/json
+
+{
+  "email":"r@r.com",
+  "password":"1"
+}
+
+###get user after login
+GET {{rootAPI}}
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJAci5jb20iLCJpYXQiOjE3MDQ5NzkxMzUsImV4cCI6MTcwNDk4MDAzNX0.9Kulu_AtpSmROZesDHxZZw-hU8RnSNRC97MoteqNtv8
+
+

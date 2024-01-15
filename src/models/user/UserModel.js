@@ -24,3 +24,8 @@ export const getOneAdmin = (filter) => {
 // update user
 
 // delete user
+
+//update "refreshJWT" filed
+export const updateRefreshJWT = async (filter) => {
+  return await UserSchema.findOneAndUpdate(filter);
+};
