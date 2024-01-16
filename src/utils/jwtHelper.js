@@ -36,6 +36,7 @@ export const refreshJWTDecode = (refreshJWT) => {
 
 // function to create jwts
 export const signJWTs = (obj) => {
+  console.log("i am obj");
   return {
     accessJWT: signAccessJWT(obj),
     refreshJWT: signRefreshJWT(obj),

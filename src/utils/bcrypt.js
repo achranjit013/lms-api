@@ -7,5 +7,6 @@ export const hashPassword = (plainPassword) => {
 };
 
 export const comparePassword = (plainPassword, hashPassword) => {
+  console.log(plainPassword, hashPassword);
   return bcryptjs.compareSync(plainPassword, hashPassword);
 };

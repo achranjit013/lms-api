@@ -28,9 +28,6 @@ export const userAuth = async (req, res, next) => {
     // get user from accessJWT
     const user = await getUserFromAccessJWT(authorization);
 
-    console.log("user is");
-    console.log(user);
-
     if (user?._id) {
       user.password = undefined;
       req.userInfo = user;

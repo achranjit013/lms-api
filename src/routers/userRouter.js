@@ -4,9 +4,14 @@ import {
   userLoginValidation,
 } from "../middlewares/joiValidation.js";
 import { comparePassword, hashPassword } from "../utils/bcrypt.js";
-import { createUser, getUserByEmail } from "../models/user/UserModel.js";
+import {
+  createUser,
+  getUserByEmail,
+  updateRefreshJWT,
+} from "../models/user/UserModel.js";
 import { signJWTs } from "../utils/jwtHelper.js";
 import { userAuth } from "../middlewares/authMiddleware.js";
+import { deleteSession } from "../models/session/SessionModel.js";
 
 const router = express.Router();
 
@@ -22,8 +27,9 @@ router.post("/login", userLoginValidation, async (req, res, next) => {
 
     if (user?._id) {
       // check password
-      console.log("second");
+      console.log("second...");
       const isMatched = comparePassword(password, user.password);
+      console.log(isMatched);
       if (isMatched) {
         // create jwts
         console.log("third");
@@ -48,6 +54,22 @@ router.post("/login", userLoginValidation, async (req, res, next) => {
     next(error);
   }
 });
+
+// logout
+// router.post("/logout", async (req, res, next) => {
+//   const { email, accessJWT } = req.body;
+
+//   // delete access token from session table
+//   accessJWT && (await deleteSession({ token: accessJWT }));
+
+//   // delete refresh token from user table
+//   email && (await updateRefreshJWT(email, ""));
+
+//   res.json({
+//     status: "error",
+//     message: "unable to logout",
+//   });
+// });
 
 // below this are all private routes
 
